@@ -15,7 +15,7 @@ public class MyDeque<E>{
     data = (E[])new Object[initialCapacity];
     start = 0;
     end = 0;
-    size = initialCapacity;
+    size = 0;
   }
 
   public int size(){
@@ -27,7 +27,7 @@ public class MyDeque<E>{
     int s = start;
     while(s != end){
       if (s < size){
-        output += s
+        output += s;
         s++;
       }
       else{
@@ -37,15 +37,24 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
-
+    if (size == 0){
+      data[start] = element;
+    }
   }
 
   public void addLast(E element){
-
+    end++;
+    data[end] = element;
   }
 
-  public E removeFirst()){
-
+  public E removeFirst(){
+    // if (start == 0){
+    //   start = data.length -1;
+    // }
+    // else{
+      start++;
+      return data[start-1];
+    // }
   }
 
   public E removeLast(){
