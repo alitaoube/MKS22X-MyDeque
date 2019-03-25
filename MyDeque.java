@@ -1,5 +1,14 @@
 public class MyDeque<E>{
+  public static void main(String[] args) {
+    MyDeque<Integer> e = new MyDeque<Integer>();
+
+    e.addFirst(5);
+    System.out.println(e.toString());
+  }
+
+
   private E[] data;
+  private E[] replace;
   private int size, start, end;
 
   @SuppressWarnings("unchecked")
@@ -34,6 +43,17 @@ public class MyDeque<E>{
         s = 0;
       }
     }
+    return output;
+  }
+
+  @SuppressWarnings("unchecked")
+  private void resize(){
+    replace = (E[])new Object[data.length * 2 + 1];
+
+    for (int x = 0; x < data.length; x++){
+      replace[x] = data[x];
+    }
+    data = replace;
   }
 
   public void addFirst(E element){
@@ -62,10 +82,20 @@ public class MyDeque<E>{
   }
 
   public E getFirst(){
-
+    return data[start];
   }
 
   public E getLast(){
-
+    return data[end];
   }
+
+}
+
+class Calculator{
+ /*Evaluate a postfix expression stored in s.
+  *Assume valid postfix notation, separated by spaces.
+  */
+ public static double eval(String s){
+   return 1;
+ }
 }
