@@ -1,20 +1,19 @@
+import java.util.NoSuchElementException;
+
 public class MyDeque<E>{
   public static void main(String[] args) {
     MyDeque<Integer> e = new MyDeque<Integer>();
 
     System.out.println(e.toString());
-    System.out.println(e.size());
-    e.addFirst(5);
-    System.out.println(e.toString());
-    System.out.println(e.size());
 
+    for (int x = 5; x > 0; x--) {
+      e.addFirst(x);
+    }
 
-    e.addFirst(5);
-    e.addFirst(1);
-    e.addFirst(2);
-    e.addFirst(3);
-    e.addFirst(4);
+    for (int y = 0; y < 5; y++) {
+      e.addLast(y);
 
+    }
     System.out.println(e.toString());
 
 
@@ -46,11 +45,11 @@ public class MyDeque<E>{
   }
 
   public String toString(){
-    String output = "{";
+    String output = "[";
     for (int x = 0; x < size(); x ++) {
       output += data[(start + x) % data.length] + " ";
     }
-    output += "}";
+    output += "]";
     return output;
   }
 
@@ -67,6 +66,7 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
+    if (element == null) throw new NullPointerException();
     if (size == data.length) resize();
 
     System.out.println("ELEMENT: " + element);
@@ -76,6 +76,8 @@ public class MyDeque<E>{
   }
 
   public void addLast(E element){
+    if (element == null) throw new NullPointerException();
+
     end++;
     data[end] = element;
     size++;
@@ -89,6 +91,8 @@ public class MyDeque<E>{
   }
 
   public E removeFirst(){
+    if (size == 0) throw new NoSuchElementException();
+
     // if (start == 0){
     //   start = data.length -1;
     // }
@@ -100,6 +104,8 @@ public class MyDeque<E>{
   }
 
   public E removeLast(){
+    if (size == 0) throw new NoSuchElementException();
+
     if (end == 0){
       E temp = data[end];
       end = data.length - 1;
@@ -115,10 +121,12 @@ public class MyDeque<E>{
   }
 
   public E getFirst(){
+    if (size == 0) throw new NoSuchElementException();
     return data[start];
   }
 
   public E getLast(){
+    if (size == 0) throw new NoSuchElementException();
     return data[end];
   }
 
