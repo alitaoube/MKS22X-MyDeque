@@ -2,6 +2,9 @@ public class MyDeque<E>{
   public static void main(String[] args) {
     MyDeque<Integer> e = new MyDeque<Integer>();
 
+    System.out.println("hello");
+
+    System.out.println(e.toString());
     e.addFirst(5);
     System.out.println(e.toString());
   }
@@ -32,23 +35,19 @@ public class MyDeque<E>{
   }
 
   public String toString(){
-    String output = "";
-    int s = start;
-    while(s != end){
-      if (s < size){
-        output += s;
-        s++;
-      }
-      else{
-        s = 0;
-      }
+    String output = "{";
+    for (int x = 0; x < size(); x ++) {
+      output += data[(start + x) % data.length] + " ";
     }
+    output += "}";
     return output;
   }
 
   @SuppressWarnings("unchecked")
   private void resize(){
     replace = (E[])new Object[data.length * 2 + 1];
+    size = data.length * 2 + 1;
+
 
     for (int x = 0; x < data.length; x++){
       replace[x] = data[x];
@@ -57,14 +56,23 @@ public class MyDeque<E>{
   }
 
   public void addFirst(E element){
-    if (size == 0){
-      data[start] = element;
-    }
+    if (size == data.length) resize();
+
+    data[mod(start - 1, data.length)] = element;
+    size++;
   }
 
   public void addLast(E element){
     end++;
     data[end] = element;
+    size++;
+
+  }
+
+  private int mod(int one, int two){
+    int output = one % two;
+    if (output < 0) output += two;
+    return output;
   }
 
   public E removeFirst(){
@@ -73,12 +81,24 @@ public class MyDeque<E>{
     // }
     // else{
       start++;
+      size--;
       return data[start-1];
     // }
   }
 
   public E removeLast(){
-
+    if (end == 0){
+      E temp = data[end];
+      end = data.length - 1;
+      size--;
+      return temp;
+    }
+    else{
+      E temp = data[end];
+      end--;
+      size--;
+      return temp;
+    }
   }
 
   public E getFirst(){
