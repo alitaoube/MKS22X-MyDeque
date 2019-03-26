@@ -2,11 +2,22 @@ public class MyDeque<E>{
   public static void main(String[] args) {
     MyDeque<Integer> e = new MyDeque<Integer>();
 
-    System.out.println("hello");
-
     System.out.println(e.toString());
+    System.out.println(e.size());
     e.addFirst(5);
     System.out.println(e.toString());
+    System.out.println(e.size());
+
+
+    e.addFirst(5);
+    e.addFirst(1);
+    e.addFirst(2);
+    e.addFirst(3);
+    e.addFirst(4);
+
+    System.out.println(e.toString());
+
+
   }
 
 
@@ -19,7 +30,7 @@ public class MyDeque<E>{
     data = (E[])new Object[10];
     start = 0;
     end = 0;
-    size = 10;
+    size = 0;
   }
 
   @SuppressWarnings("unchecked")
@@ -58,7 +69,9 @@ public class MyDeque<E>{
   public void addFirst(E element){
     if (size == data.length) resize();
 
-    data[mod(start - 1, data.length)] = element;
+    System.out.println("ELEMENT: " + element);
+    start = mod(start - 1, data.length);
+    data[start] = element;
     size++;
   }
 
