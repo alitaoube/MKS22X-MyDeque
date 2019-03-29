@@ -1,23 +1,40 @@
 import java.util.NoSuchElementException;
 
 public class MyDeque<E>{
-  public static void main(String[] args) {
+  // public static void main(String[] args) {
+  // try{
     MyDeque<Integer> e = new MyDeque<Integer>();
-
-    System.out.println(e.toString());
-
-    for (int x = 5; x > 0; x--) {
-      e.addFirst(x);
-    }
-
-    for (int y = 0; y < 5; y++) {
-      e.addLast(y);
-
-    }
-    System.out.println(e.toString());
+  //
+  //   System.out.println(e.toString());
+  //
+  // Integer x = 0;
+  //   e.addFirst(x);
+  // }
 
 
-  }
+  //
+  //   System.out.println(e.toString());
+  //
+  //
+  //   for (int x = 5; x > 0; x--) {
+  //     e.addFirst(x);
+  //   }
+  //
+  //   for (int y = 0; y < 5; y++) {
+  //     e.addLast(y);
+  //
+  //   }
+  //   System.out.println(e.toString());
+  //
+  //   e.removeLast();
+  //
+  //   System.out.println(e.toString());
+  //
+  //   e.removeFirst();
+  //
+  //   System.out.println(e.toString());
+  //
+  // }
 
 
   private E[] data;
@@ -47,7 +64,8 @@ public class MyDeque<E>{
   public String toString(){
     String output = "[";
     for (int x = 0; x < size(); x ++) {
-      output += data[(start + x) % data.length] + " ";
+      output += data[(start + x) % data.length];
+      if (x != size() - 1) output += " ";
     }
     output += "]";
     return output;
@@ -78,10 +96,13 @@ public class MyDeque<E>{
   public void addLast(E element){
     if (element == null) throw new NullPointerException();
 
-    end++;
-    data[end] = element;
-    size++;
+    if (size() >= data.length - 1) resize();
 
+    System.out.println("here");
+    data[end] = element;
+    System.out.println("here1");
+
+    end = (end+1) % data.length;
   }
 
   private int mod(int one, int two){
@@ -130,13 +151,4 @@ public class MyDeque<E>{
     return data[end];
   }
 
-}
-
-class Calculator{
- /*Evaluate a postfix expression stored in s.
-  *Assume valid postfix notation, separated by spaces.
-  */
- public static double eval(String s){
-   return 1;
- }
 }

@@ -2,13 +2,13 @@ import java.util.*;
 
 public class Driver {
 
-	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * 
+	/* * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *
 
 
 	Important: this Driver is contingent on your toString already working. If your toString is broken, you may recieve confusing results.
 
 
-	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */ 
+	 * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * */
 
 	private static String message(String input, String desired, String output) {
 		return String.format("\n%s\n\n\tDesired output:   %s\n\tYour output:      %s", input, desired, output);
@@ -44,7 +44,7 @@ public class Driver {
 
 		// empty array
 
-		if (!deque.toString().equals("{}"))
+		if (!deque.toString().equals("[]"))
 			out.add(message("{}.toString()", "\"{}\"", "\""+deque.toString()+"\""));
 
 		if (deque.size() != 0)
