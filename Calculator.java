@@ -38,14 +38,14 @@ public class Calculator{
        output.removeLast();
        double two = output.getLast();
        output.removeLast();
-       output.addLast(one / two);
+       output.addLast(two / one);
      }
      else if (vals[x].equals("%")){
        double one = output.getLast();
        output.removeLast();
        double two = output.getLast();
        output.removeLast();
-       output.addLast(one % two);
+         output.addLast(two % one);
      }
      // else if (vals[x].equals(".")){
      //   int one = output.getLast();
