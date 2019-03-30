@@ -3,7 +3,7 @@ import java.util.NoSuchElementException;
 public class MyDeque<E>{
   // public static void main(String[] args) {
   // try{
-    MyDeque<Integer> e = new MyDeque<Integer>();
+    // MyDeque<Integer> e = new MyDeque<Integer>();
   //
   //   System.out.println(e.toString());
   //
@@ -65,7 +65,7 @@ public class MyDeque<E>{
     String output = "[";
     for (int x = 0; x < size(); x ++) {
       output += data[(start + x) % data.length];
-      if (x != size() - 1) output += " ";
+      if (x != size() - 1) output += ", ";
     }
     output += "]";
     return output;
@@ -74,21 +74,21 @@ public class MyDeque<E>{
   @SuppressWarnings("unchecked")
   private void resize(){
     replace = (E[])new Object[data.length * 2 + 1];
-    size = data.length * 2 + 1;
-
 
     for (int x = 0; x < data.length; x++){
-      replace[x] = data[x];
+      replace[x] = data[(start + x) % data.length];
     }
+    end = size;
+    start = 0;
     data = replace;
   }
 
   public void addFirst(E element){
     if (element == null) throw new NullPointerException();
-    if (size == data.length) resize();
+    if (size >= data.length - 1) resize();
 
-    System.out.println("ELEMENT: " + element);
-    start = mod(start - 1, data.length);
+    // System.out.println("ELEMENT: " + element);
+    start = mod(start - 1);
     data[start] = element;
     size++;
   }
@@ -98,47 +98,34 @@ public class MyDeque<E>{
 
     if (size() >= data.length - 1) resize();
 
-    System.out.println("here");
+    // System.out.println("here");
     data[end] = element;
-    System.out.println("here1");
+    // System.out.println("here1");
 
     end = (end+1) % data.length;
+    size++;
   }
 
-  private int mod(int one, int two){
-    int output = one % two;
-    if (output < 0) output += two;
-    return output;
+  private int mod(int one){
+    return (one + data.length) % data.length;
   }
 
   public E removeFirst(){
     if (size == 0) throw new NoSuchElementException();
-
-    // if (start == 0){
-    //   start = data.length -1;
-    // }
-    // else{
-      start++;
+      start = (start + 1) % data.length;
       size--;
-      return data[start-1];
+      return data[mod(start - 1)];
     // }
   }
 
   public E removeLast(){
     if (size == 0) throw new NoSuchElementException();
 
-    if (end == 0){
-      E temp = data[end];
-      end = data.length - 1;
-      size--;
-      return temp;
-    }
-    else{
-      E temp = data[end];
-      end--;
-      size--;
-      return temp;
-    }
+    end = mod(end - 1);
+    size--;
+    int index = (end + 1) % data.length - 1;
+    if (index < 0) index = data.length - 1;
+    return data[index];
   }
 
   public E getFirst(){
@@ -148,7 +135,8 @@ public class MyDeque<E>{
 
   public E getLast(){
     if (size == 0) throw new NoSuchElementException();
-    return data[end];
+    if (end == 0) return data[data.length - 1];
+    return data[end - 1];
   }
 
 }

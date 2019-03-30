@@ -10,35 +10,45 @@ public class Calculator{
    String[] vals = s.split(" ");
    MyDeque<Integer> output = new MyDeque<Integer>();
    for (int x = 0; x < vals.length; x++) {
-     if (vals[x] == "+"){
+     if (vals[x].equals("+")) {
+       // System.out.println("in here");
+       // System.out.println(vals[x]);
        int one = output.getLast();
        output.removeLast();
        int two = output.getLast();
        output.removeLast();
        output.addLast(one + two);
      }
-     if (vals[x] == "-"){
+     else if (vals[x].equals("-")){
        int one = output.getLast();
        output.removeLast();
        int two = output.getLast();
        output.removeLast();
-       output.addLast(one - two);
+       output.addLast(two - one);
      }
-     if (vals[x] == "*"){
+     else if (vals[x].equals("*")){
        int one = output.getLast();
        output.removeLast();
        int two = output.getLast();
        output.removeLast();
        output.addLast(one * two);
      }
-     if (vals[x] == "/"){
+     else if (vals[x].equals("/")){
        int one = output.getLast();
        output.removeLast();
        int two = output.getLast();
        output.removeLast();
        output.addLast(one / two);
      }
+     else if (vals[x].equals("%")){
+       int one = output.getLast();
+       output.removeLast();
+       int two = output.getLast();
+       output.removeLast();
+       output.addLast(one % two);
+     }
      else{
+       // System.out.println(vals[x]);
        output.addLast(Integer.parseInt(vals[x]));
      }
    }
