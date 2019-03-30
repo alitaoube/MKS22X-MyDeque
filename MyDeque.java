@@ -1,42 +1,6 @@
 import java.util.NoSuchElementException;
 
 public class MyDeque<E>{
-  // public static void main(String[] args) {
-  // try{
-    // MyDeque<Integer> e = new MyDeque<Integer>();
-  //
-  //   System.out.println(e.toString());
-  //
-  // Integer x = 0;
-  //   e.addFirst(x);
-  // }
-
-
-  //
-  //   System.out.println(e.toString());
-  //
-  //
-  //   for (int x = 5; x > 0; x--) {
-  //     e.addFirst(x);
-  //   }
-  //
-  //   for (int y = 0; y < 5; y++) {
-  //     e.addLast(y);
-  //
-  //   }
-  //   System.out.println(e.toString());
-  //
-  //   e.removeLast();
-  //
-  //   System.out.println(e.toString());
-  //
-  //   e.removeFirst();
-  //
-  //   System.out.println(e.toString());
-  //
-  // }
-
-
   private E[] data;
   private E[] replace;
   private int size, start, end;
@@ -73,8 +37,10 @@ public class MyDeque<E>{
 
   @SuppressWarnings("unchecked")
   private void resize(){
+    // double and add one to capacity
     replace = (E[])new Object[data.length * 2 + 1];
 
+    // copy valeus over
     for (int x = 0; x < data.length; x++){
       replace[x] = data[(start + x) % data.length];
     }
@@ -98,9 +64,7 @@ public class MyDeque<E>{
 
     if (size() >= data.length - 1) resize();
 
-    // System.out.println("here");
     data[end] = element;
-    // System.out.println("here1");
 
     end = (end+1) % data.length;
     size++;
@@ -115,7 +79,6 @@ public class MyDeque<E>{
       start = (start + 1) % data.length;
       size--;
       return data[mod(start - 1)];
-    // }
   }
 
   public E removeLast(){
